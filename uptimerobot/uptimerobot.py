@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
+
 try:
     import urllib.request as urllib_request
 except ImportError:
@@ -71,7 +73,8 @@ class UptimeRobot(object):
             url += "&search=%s" % search
         if monitors is not None:
             url += "&monitors=%s" % '-'.join(str(m) for m in monitors)
-
+            pass
+        url += "&noJsonCallback=1&format=json"
         return self.requestApi(url)
 
 
@@ -162,7 +165,6 @@ class UptimeRobot(object):
         else:
             return False
 
-
     def requestApi(self, url):
         response = urllib_request.urlopen(url)
         content = response.read().decode('utf-8')
@@ -181,11 +183,14 @@ class UptimeRobot(object):
             url += "getAlertContacts?apiKey=%s" % self.apiKey
             if alertContacts:
                 url += "&alertContacts=%s" % alertContacts
+                pass
             if offset:
                 url += "&offset=%s" % offset
+                pass
             if limit:
                 url += "&limit=%s" % limit
-            url += "&format=json"
+                pass
+            url += "&noJsonCallback=1&format=json"
             return self.requestApi(url)
 
     def getAlertContactIds(self, urlFormat=False):
@@ -238,7 +243,7 @@ if __name__ == "__main__":
         elif arg.startswith("apiKey="):
             apiKey = arg.split("=")[1]
     if not monitorFriendlyName or not monitorURL:
-        print "Usage: uptimerobot.py monitorFriendlyName=\"name\" monitorURL=\"www.url.com\""
+        print ("Usage: uptimerobot.py monitorFriendlyName=\"name\" monitorURL=\"www.url.com\"")
         sys.exit(1)
 
     if not apiKey:

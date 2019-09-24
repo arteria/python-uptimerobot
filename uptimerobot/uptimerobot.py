@@ -73,7 +73,6 @@ class UptimeRobot(object):
             url += "&search=%s" % search
         if monitors is not None:
             url += "&monitors=%s" % '-'.join(str(m) for m in monitors)
-            pass
         url += "&noJsonCallback=1&format=json"
         return self.requestApi(url)
 
@@ -183,13 +182,10 @@ class UptimeRobot(object):
             url += "getAlertContacts?apiKey=%s" % self.apiKey
             if alertContacts:
                 url += "&alertContacts=%s" % alertContacts
-                pass
             if offset:
                 url += "&offset=%s" % offset
-                pass
             if limit:
                 url += "&limit=%s" % limit
-                pass
             url += "&noJsonCallback=1&format=json"
             return self.requestApi(url)
 
@@ -243,7 +239,7 @@ if __name__ == "__main__":
         elif arg.startswith("apiKey="):
             apiKey = arg.split("=")[1]
     if not monitorFriendlyName or not monitorURL:
-        print ("Usage: uptimerobot.py monitorFriendlyName=\"name\" monitorURL=\"www.url.com\"")
+        print("Usage: uptimerobot.py monitorFriendlyName=\"name\" monitorURL=\"www.url.com\"")
         sys.exit(1)
 
     if not apiKey:
